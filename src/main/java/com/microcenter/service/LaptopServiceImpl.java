@@ -2,6 +2,9 @@ package com.microcenter.service;
 
 import com.microcenter.dto.LaptopDTO;
 import com.microcenter.entity.Laptop;
+
+import static com.microcenter.util.Utils.getDTOFrom;
+import static com.microcenter.util.Utils.getEntityFrom;
 import com.microcenter.repository.LaptopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service(value = "laptopService")
 @Transactional
@@ -20,17 +24,7 @@ public class LaptopServiceImpl implements LaptopService
     @Override
     public Integer addLaptop(LaptopDTO laptopDTO)
     {
-        Laptop laptop = new Laptop();
-        if (laptopDTO!=null)
-        {
-            laptop.setName(laptopDTO.getName());
-            laptop.setCpu(laptopDTO.getCpu());
-            laptop.setRam(laptopDTO.getRam());
-            laptop.setNvme(laptopDTO.getNvme());
-            laptop.setSsd(laptopDTO.getSsd());
-            laptop.setHdd(laptopDTO.getHdd());
-            laptop.setGpu(laptopDTO.getGpu());
-        }
+        Laptop laptop = getEntityFrom(laptopDTO);
         return laptopRepository.save(laptop).getId();
     }
 
@@ -39,17 +33,7 @@ public class LaptopServiceImpl implements LaptopService
     {
         Laptop laptop = laptopRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("MicroCenterException"));
-        return new LaptopDTO
-                (
-                    laptop.getId(),
-                    laptop.getName(),
-                    laptop.getCpu(),
-                    laptop.getRam(),
-                    laptop.getNvme(),
-                    laptop.getSsd(),
-                    laptop.getHdd(),
-                    laptop.getGpu()
-                );
+        return getDTOFrom(laptop);
     }
 
     @Override
@@ -58,17 +42,7 @@ public class LaptopServiceImpl implements LaptopService
         List<LaptopDTO> laptopList = new ArrayList<>();
         laptopRepository.findAll().forEach(laptop ->
         {
-            LaptopDTO laptopDTO = new LaptopDTO
-                    (
-                        laptop.getId(),
-                        laptop.getName(),
-                        laptop.getCpu(),
-                        laptop.getRam(),
-                        laptop.getNvme(),
-                        laptop.getSsd(),
-                        laptop.getHdd(),
-                        laptop.getGpu()
-                    );
+            LaptopDTO laptopDTO = getDTOFrom(laptop);
             laptopList.add(laptopDTO);
         });
         return laptopList;

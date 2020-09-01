@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
@@ -39,7 +40,7 @@ public class LaptopApi
     public ResponseEntity<String> addLaptop(@RequestBody LaptopDTO laptopDTO)
     {
         Integer laptopId = laptopService.addLaptop(laptopDTO);
-        return new ResponseEntity<>(environment.getProperty("API.LAPTOP_ADD_SUCCESS")+laptopId,
+        return new ResponseEntity<>(environment.getProperty("API.LAPTOP_ADD_SUCCESS")+" "+laptopId,
                 HttpStatus.OK);
     }
 
@@ -55,7 +56,7 @@ public class LaptopApi
     public ResponseEntity<String> deleteLaptop(@PathVariable Integer id)
     {
         laptopService.deleteLaptop(id);
-        return new ResponseEntity<>(environment.getProperty("API.LAPTOP_DELETE_SUCCESS")+id,
+        return new ResponseEntity<>(environment.getProperty("API.LAPTOP_DELETE_SUCCESS")+" "+id,
                 HttpStatus.OK);
     }
 
