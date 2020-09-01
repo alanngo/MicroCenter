@@ -60,14 +60,14 @@ public class LaptopServiceImpl implements LaptopService
         {
             LaptopDTO laptopDTO = new LaptopDTO
                     (
-                            laptop.getId(),
-                            laptop.getName(),
-                            laptop.getCpu(),
-                            laptop.getRam(),
-                            laptop.getNvme(),
-                            laptop.getSsd(),
-                            laptop.getHdd(),
-                            laptop.getGpu()
+                        laptop.getId(),
+                        laptop.getName(),
+                        laptop.getCpu(),
+                        laptop.getRam(),
+                        laptop.getNvme(),
+                        laptop.getSsd(),
+                        laptop.getHdd(),
+                        laptop.getGpu()
                     );
             laptopList.add(laptopDTO);
         });
@@ -75,7 +75,17 @@ public class LaptopServiceImpl implements LaptopService
     }
 
     @Override
-    public void updateSpecs(LaptopDTO laptopDTO) {
+    public void updateSpecs(LaptopDTO laptopDTO)
+    {
+        Laptop laptop = laptopRepository.findById(laptopDTO.getId())
+                .orElseThrow(() -> new RuntimeException("MicroCenterException"));
+        laptop.setName(laptopDTO.getName());
+        laptop.setCpu(laptopDTO.getCpu());
+        laptop.setRam(laptopDTO.getRam());
+        laptop.setNvme(laptopDTO.getNvme());
+        laptop.setSsd(laptopDTO.getSsd());
+        laptop.setHdd(laptopDTO.getHdd());
+        laptop.setGpu(laptopDTO.getGpu());
 
     }
 

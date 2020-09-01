@@ -1,7 +1,6 @@
 package com.microcenter.api;
 
 import com.microcenter.dto.LaptopDTO;
-import com.microcenter.entity.Laptop;
 import com.microcenter.service.LaptopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -40,21 +39,24 @@ public class LaptopApi
     public ResponseEntity<String> addLaptop(@RequestBody LaptopDTO laptopDTO)
     {
         Integer laptopId = laptopService.addLaptop(laptopDTO);
-        return new ResponseEntity<>(environment.getProperty("API.LAPTOP_ADD_SUCCESS")+laptopId, HttpStatus.OK);
+        return new ResponseEntity<>(environment.getProperty("API.LAPTOP_ADD_SUCCESS")+laptopId,
+                HttpStatus.OK);
     }
 
     @PutMapping("/")
     public ResponseEntity<String> updateSpecs(@RequestBody LaptopDTO laptopDTO)
     {
-        //TODO: implement
-        return null;
+        laptopService.updateSpecs(laptopDTO);
+        return new ResponseEntity<>(environment.getProperty("API.LAPTOP_UPDATE_SUCCESS")+laptopDTO.getId(),
+                HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteLaptop(@PathVariable Integer id)
     {
         laptopService.deleteLaptop(id);
-        return new ResponseEntity<>(environment.getProperty("API.LAPTOP_DELETE_SUCCESS")+id, HttpStatus.OK);
+        return new ResponseEntity<>(environment.getProperty("API.LAPTOP_DELETE_SUCCESS")+id,
+                HttpStatus.OK);
     }
 
 }
