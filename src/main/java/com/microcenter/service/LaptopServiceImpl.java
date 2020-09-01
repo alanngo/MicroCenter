@@ -18,8 +18,20 @@ public class LaptopServiceImpl implements LaptopService
     private LaptopRepository laptopRepository;
 
     @Override
-    public Integer addLaptop(LaptopDTO laptopDTO) {
-        return null;
+    public Integer addLaptop(LaptopDTO laptopDTO)
+    {
+        Laptop laptop = new Laptop();
+        if (laptopDTO!=null)
+        {
+            laptop.setName(laptopDTO.getName());
+            laptop.setCpu(laptopDTO.getCpu());
+            laptop.setRam(laptopDTO.getRam());
+            laptop.setNvme(laptopDTO.getNvme());
+            laptop.setSsd(laptopDTO.getSsd());
+            laptop.setHdd(laptopDTO.getHdd());
+            laptop.setGpu(laptopDTO.getGpu());
+        }
+        return laptopRepository.save(laptop).getId();
     }
 
     @Override
@@ -68,7 +80,8 @@ public class LaptopServiceImpl implements LaptopService
     }
 
     @Override
-    public void deleteLaptop(Integer id) {
-
+    public void deleteLaptop(Integer id)
+    {
+        laptopRepository.deleteById(id);
     }
 }

@@ -30,29 +30,31 @@ public class LaptopApi
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<LaptopDTO>>  getLaptops()
+    public ResponseEntity<List<LaptopDTO>> getLaptops()
     {
         List<LaptopDTO> laptops = laptopService.getLaptops();
         return new ResponseEntity<>(laptops, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public Integer addLaptop(@RequestBody LaptopDTO laptopDTO)
+    public ResponseEntity<String> addLaptop(@RequestBody LaptopDTO laptopDTO)
+    {
+        Integer laptopId = laptopService.addLaptop(laptopDTO);
+        return new ResponseEntity<>(environment.getProperty("API.LAPTOP_ADD_SUCCESS")+laptopId, HttpStatus.OK);
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<String> updateSpecs(@RequestBody LaptopDTO laptopDTO)
     {
         //TODO: implement
         return null;
     }
 
-    @PutMapping("/")
-    public void updateSpecs(@RequestBody LaptopDTO laptopDTO)
-    {
-        //TODO: implement
-    }
-
     @DeleteMapping("{id}")
-    public void deleteLaptop(@PathVariable Integer id)
+    public ResponseEntity<String> deleteLaptop(@PathVariable Integer id)
     {
-        //TODO: implement
+        laptopService.deleteLaptop(id);
+        return new ResponseEntity<>(environment.getProperty("API.LAPTOP_DELETE_SUCCESS")+id, HttpStatus.OK);
     }
 
 }
