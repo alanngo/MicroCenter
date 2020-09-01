@@ -23,8 +23,21 @@ public class LaptopServiceImpl implements LaptopService
     }
 
     @Override
-    public Laptop getLaptop(Integer id) {
-        return null;
+    public LaptopDTO getLaptop(Integer id)
+    {
+        Laptop laptop = laptopRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("MicroCenterException"));
+        return new LaptopDTO
+                (
+                    laptop.getId(),
+                    laptop.getName(),
+                    laptop.getCpu(),
+                    laptop.getRam(),
+                    laptop.getNvme(),
+                    laptop.getSsd(),
+                    laptop.getHdd(),
+                    laptop.getGpu()
+                );
     }
 
     @Override

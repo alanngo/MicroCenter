@@ -8,7 +8,7 @@ import java.util.List;
 public interface LaptopService
 {
     Integer addLaptop(LaptopDTO laptopDTO);
-    Laptop getLaptop(Integer id);
+    LaptopDTO getLaptop(Integer id);
     List<LaptopDTO> getLaptops();
     void updateSpecs(LaptopDTO laptopDTO);
     void deleteLaptop(Integer id);

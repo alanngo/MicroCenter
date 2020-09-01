@@ -23,16 +23,15 @@ public class LaptopApi
     private Environment environment;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Laptop> getLaptop(@PathVariable Integer id)
+    public ResponseEntity<LaptopDTO> getLaptop(@PathVariable Integer id)
     {
-        //TODO: implement
-        return null;
+        LaptopDTO laptop = laptopService.getLaptop(id);
+        return new ResponseEntity<>(laptop, HttpStatus.OK);
     }
 
     @GetMapping("/")
     public ResponseEntity<List<LaptopDTO>>  getLaptops()
     {
-        //TODO: implement
         List<LaptopDTO> laptops = laptopService.getLaptops();
         return new ResponseEntity<>(laptops, HttpStatus.OK);
     }
