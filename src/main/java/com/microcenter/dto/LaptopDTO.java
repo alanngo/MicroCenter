@@ -1,33 +1,62 @@
 package com.microcenter.dto;
 
-import com.microcenter.entity.Laptop;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import java.util.Objects;
 
 public class LaptopDTO
 {
     private Integer id;
+
+    @NotNull
     private String name;
+
+
+    @Pattern(regexp = "(Intel core i[3579] [0-9]{4,}[A-Za-z]*)" +
+                        "|(AMD Ryzen [3579] [0-9]{4,}[A-Za-z]*)",
+            message = "microcenter.cpu.invalid")
     private String cpu;
+
+
+    @Min(value = 4)
     private Integer ram;
+
+    @NotNull
     private Integer nvme;
+
+    @NotNull
     private Integer ssd;
+
+    @NotNull
     private Integer hdd;
+
+    @Pattern(regexp = "(Intel U?HD [56][23]0)|" +
+                        "([Nn]vidia Geforce [GR]TX [123][06][5678]0)(| super| Ti)",
+            message = "microcenter.gpu.invalid")
     private String gpu;
 
     public LaptopDTO(){}
 
-    public LaptopDTO(Integer id, String name, String cpu, Integer ram, Integer nvme, Integer ssd, Integer hdd, String gpu)
+    public LaptopDTO(Integer id,
+                     String name,
+                     String cpu,
+                     Integer ram,
+                     Integer nvme,
+                     Integer ssd,
+                     Integer hdd,
+                     String gpu)
     {
         this();
-        this.id = id;
-        this.name = name;
-        this.cpu = cpu;
-        this.ram = ram;
-        this.nvme = nvme;
-        this.ssd = ssd;
-        this.hdd = hdd;
-        this.gpu = gpu;
+        setId(id);
+        setName(name);
+        setCpu(cpu);
+        setRam(ram);
+        setNvme(nvme);
+        setSsd(ssd);
+        setHdd(hdd);
+        setGpu(gpu);
     }
 
     public Integer getId() {
