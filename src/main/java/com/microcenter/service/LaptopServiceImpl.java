@@ -83,5 +83,18 @@ public class LaptopServiceImpl implements LaptopService
         return laptopDTOList;
     }
 
+    @Override
+    public List<LaptopDTO> getAllByCPU(String cpuCompany)
+    {
+        List<LaptopDTO> laptopDTOList = new ArrayList<>();
+        List<Laptop> laptops = laptopRepository.getByCPUCompany(cpuCompany);
+        laptops.forEach(laptop ->
+        {
+            LaptopDTO laptopDTO = getDTOFrom(laptop);
+            laptopDTOList.add(laptopDTO);
+        });
+        return laptopDTOList;
+    }
+
 
 }

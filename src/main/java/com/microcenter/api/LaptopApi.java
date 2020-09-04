@@ -67,6 +67,14 @@ public class LaptopApi
                 HttpStatus.OK);
     }
 
+
+    @GetMapping("/cpu/{cpu}")
+    public ResponseEntity<List<LaptopDTO>> getAllLaptopsWithCPU(@PathVariable String cpu)
+    {
+        List<LaptopDTO> laptops = laptopService.getAllByCPU(cpu);
+        return new ResponseEntity<>(laptops, HttpStatus.OK);
+    }
+
     @GetMapping("/ram/{ram}")
     public ResponseEntity<List<LaptopDTO>> getAllLaptopsWithRam(@PathVariable Integer ram)
     {

@@ -16,4 +16,5 @@ public interface LaptopService
 
     //advanced operations
     List<LaptopDTO> getAllByRam(Integer ramSize);
+    List<LaptopDTO> getAllByCPU(String cpuCompany);
 }
