@@ -67,4 +67,10 @@ public class LaptopApi
                 HttpStatus.OK);
     }
 
+    @GetMapping("/ram/{ram}")
+    public ResponseEntity<List<LaptopDTO>> getAllLaptopsWithRam(@PathVariable Integer ram)
+    {
+        List<LaptopDTO> laptops = laptopService.getAllByRam(ram);
+        return new ResponseEntity<>(laptops, HttpStatus.OK);
+    }
 }

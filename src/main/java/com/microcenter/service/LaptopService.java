@@ -7,9 +7,13 @@ import java.util.List;
 
 public interface LaptopService
 {
+    //basic operations
     Integer addLaptop(LaptopDTO laptopDTO);
     LaptopDTO getLaptop(Integer id);
     List<LaptopDTO> getLaptops();
     void updateSpecs(LaptopDTO laptopDTO);
     void deleteLaptop(Integer id);
+
+    //advanced operations
+    List<LaptopDTO> getAllByRam(Integer ramSize);
 }

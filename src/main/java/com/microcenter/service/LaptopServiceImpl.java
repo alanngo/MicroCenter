@@ -21,6 +21,7 @@ public class LaptopServiceImpl implements LaptopService
     @Autowired
     private LaptopRepository laptopRepository;
 
+    // basic operations
     @Override
     public Integer addLaptop(LaptopDTO laptopDTO)
     {
@@ -68,4 +69,19 @@ public class LaptopServiceImpl implements LaptopService
     {
         laptopRepository.deleteById(id);
     }
+
+    @Override
+    public List<LaptopDTO> getAllByRam(Integer ramSize)
+    {
+        List<LaptopDTO> laptopDTOList = new ArrayList<>();
+        List<Laptop> laptops = laptopRepository.findAllByRam(ramSize);
+        laptops.forEach(laptop ->
+        {
+            LaptopDTO laptopDTO = getDTOFrom(laptop);
+            laptopDTOList.add(laptopDTO);
+        });
+        return laptopDTOList;
+    }
+
+
 }
