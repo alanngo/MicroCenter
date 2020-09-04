@@ -1,4 +1,4 @@
-package com.microcenter.util;
+package com.microcenter.utility;
 
 import com.microcenter.dto.LaptopDTO;
 import com.microcenter.entity.Laptop;

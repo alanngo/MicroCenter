@@ -3,8 +3,10 @@ package com.microcenter.service;
 import com.microcenter.dto.LaptopDTO;
 import com.microcenter.entity.Laptop;
 
-import static com.microcenter.util.Utils.getDTOFrom;
-import static com.microcenter.util.Utils.getEntityFrom;
+import static com.microcenter.utility.Utils.getDTOFrom;
+import static com.microcenter.utility.Utils.getEntityFrom;
+
+import com.microcenter.exception.MicroCenterException;
 import com.microcenter.repository.LaptopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,10 +32,10 @@ public class LaptopServiceImpl implements LaptopService
     }
 
     @Override
-    public LaptopDTO getLaptop(Integer id)
+    public LaptopDTO getLaptop(Integer id) throws MicroCenterException 
     {
         Laptop laptop = laptopRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("MicroCenterException"));
+                .orElseThrow(() -> new MicroCenterException("Service.LAPTOP_NOT_FOUND"));
         return getDTOFrom(laptop);
     }
 
@@ -50,10 +52,10 @@ public class LaptopServiceImpl implements LaptopService
     }
 
     @Override
-    public void updateSpecs(LaptopDTO laptopDTO)
+    public void updateSpecs(LaptopDTO laptopDTO) throws MicroCenterException
     {
         Laptop laptop = laptopRepository.findById(laptopDTO.getId())
-                .orElseThrow(() -> new RuntimeException("MicroCenterException"));
+                .orElseThrow(() -> new MicroCenterException("Service.LAPTOP_NOT_FOUND"));
         laptop.setName(laptopDTO.getName());
         laptop.setCpu(laptopDTO.getCpu());
         laptop.setRam(laptopDTO.getRam());

@@ -1,6 +1,7 @@
 package com.microcenter.api;
 
 import com.microcenter.dto.LaptopDTO;
+import com.microcenter.exception.MicroCenterException;
 import com.microcenter.service.LaptopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -32,7 +33,7 @@ public class LaptopApi
     private Environment environment;
 
     @GetMapping("/{id}")
-    public ResponseEntity<LaptopDTO> getLaptop(@PathVariable Integer id)
+    public ResponseEntity<LaptopDTO> getLaptop(@PathVariable Integer id) throws MicroCenterException
     {
         LaptopDTO laptop = laptopService.getLaptop(id);
         return new ResponseEntity<>(laptop, HttpStatus.OK);
@@ -53,7 +54,7 @@ public class LaptopApi
     }
 
     @PutMapping("/")
-    public ResponseEntity<LaptopDTO> updateSpecs(@Valid @RequestBody LaptopDTO laptopDTO)
+    public ResponseEntity<LaptopDTO> updateSpecs(@Valid @RequestBody LaptopDTO laptopDTO) throws MicroCenterException
     {
         laptopService.updateSpecs(laptopDTO);
         return new ResponseEntity<>(laptopDTO, HttpStatus.OK);

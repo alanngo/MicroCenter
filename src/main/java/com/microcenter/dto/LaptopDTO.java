@@ -18,8 +18,7 @@ public class LaptopDTO
                         "|(AMD Ryzen [3579] [0-9]{4,}[A-Za-z]*)",
             message = "microcenter.cpu.invalid")
     private String cpu;
-
-
+    
     @Min(value = 4)
     private Integer ram;
 

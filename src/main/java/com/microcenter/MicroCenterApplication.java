@@ -9,12 +9,6 @@ public class MicroCenterApplication
 {
 	public static void main(String[] args)
 	{
-		try
-		{
-			SpringApplication.run(MicroCenterApplication.class, args);
-		} catch (Throwable e)
-		{
-			e.printStackTrace();
-		}
+		SpringApplication.run(MicroCenterApplication.class, args);
 	}
 }
