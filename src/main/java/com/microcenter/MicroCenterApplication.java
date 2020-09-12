@@ -9,6 +9,6 @@ public class MicroCenterApplication
 {
 	public static void main(String[] args)
 	{
-		SpringApplication.run(MicroCenterApplication.class, args);
+			SpringApplication.run(MicroCenterApplication.class, args);
 	}
 }

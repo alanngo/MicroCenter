@@ -39,28 +39,28 @@ public class LaptopApi
         return new ResponseEntity<>(laptop, HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<LaptopDTO>> getLaptops()
     {
         List<LaptopDTO> laptops = laptopService.getLaptops();
         return new ResponseEntity<>(laptops, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<LaptopDTO> addLaptop(@Valid @RequestBody  LaptopDTO laptopDTO)
     {
         Integer laptopId = laptopService.addLaptop(laptopDTO);
         return new ResponseEntity<>(laptopDTO, HttpStatus.OK);
     }
 
-    @PutMapping("/")
+    @PutMapping("")
     public ResponseEntity<LaptopDTO> updateSpecs(@Valid @RequestBody LaptopDTO laptopDTO) throws MicroCenterException
     {
         laptopService.updateSpecs(laptopDTO);
         return new ResponseEntity<>(laptopDTO, HttpStatus.OK);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteLaptop(@PathVariable Integer id)
     {
         laptopService.deleteLaptop(id);
