@@ -38,14 +38,17 @@ public class LaptopDTO
 
     public LaptopDTO(){}
 
-    public LaptopDTO(Integer id,
-                     String name,
-                     String cpu,
-                     Integer ram,
-                     Integer nvme,
-                     Integer ssd,
-                     Integer hdd,
-                     String gpu)
+    public LaptopDTO
+            (
+                 Integer id,
+                 String name,
+                 String cpu,
+                 Integer ram,
+                 Integer nvme,
+                 Integer ssd,
+                 Integer hdd,
+                 String gpu
+            )
     {
         this();
         setId(id);
@@ -58,13 +61,9 @@ public class LaptopDTO
         setGpu(gpu);
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() { return id; }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setId(Integer id) { this.id = id; }
 
     public String getName() {
         return name;

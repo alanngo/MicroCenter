@@ -41,25 +41,26 @@ public class LaptopApi
     }
 
     @PostMapping("")
-    public ResponseEntity<LaptopDTO> addLaptop(@Valid @RequestBody  LaptopDTO laptopDTO)
+    public ResponseEntity<LaptopDTO> addLaptop(@Valid @RequestBody LaptopDTO laptopDTO)
     {
-        Integer laptopId = laptopService.addLaptop(laptopDTO);
-        return new ResponseEntity<>(laptopDTO, HttpStatus.OK);
+        LaptopDTO added = laptopService.addLaptop(laptopDTO);
+        return new ResponseEntity<>(added, HttpStatus.OK);
     }
 
     @PutMapping("")
-    public ResponseEntity<LaptopDTO> updateSpecs(@Valid @RequestBody LaptopDTO laptopDTO) throws MicroCenterException
+    public ResponseEntity<LaptopDTO> updateSpecs(@Valid @RequestBody LaptopDTO laptopDTO)
+            throws MicroCenterException
     {
         laptopService.updateSpecs(laptopDTO);
         return new ResponseEntity<>(laptopDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteLaptop(@PathVariable Integer id)
+    public ResponseEntity<LaptopDTO> deleteLaptop(@PathVariable Integer id)
+            throws MicroCenterException
     {
-        laptopService.deleteLaptop(id);
-        return new ResponseEntity<>(environment.getProperty("API.LAPTOP_DELETE_SUCCESS")+" "+id,
-                HttpStatus.OK);
+        LaptopDTO deleted = laptopService.deleteLaptop(id);
+        return new ResponseEntity<>(deleted, HttpStatus.OK);
     }
 
 

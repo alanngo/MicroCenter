@@ -25,10 +25,12 @@ public class LaptopServiceImpl implements LaptopService
 
     // basic operations
     @Override
-    public Integer addLaptop(LaptopDTO laptopDTO)
+    public LaptopDTO addLaptop(LaptopDTO laptopDTO)
     {
         Laptop laptop = getEntityFrom(laptopDTO);
-        return laptopRepository.save(laptop).getId();
+        Integer id = laptopRepository.save(laptop).getId();
+        laptopDTO.setId(id);
+        return laptopDTO;
     }
 
     @Override
@@ -67,9 +69,12 @@ public class LaptopServiceImpl implements LaptopService
     }
 
     @Override
-    public void deleteLaptop(Integer id)
+    public LaptopDTO deleteLaptop(Integer id) throws MicroCenterException
     {
+        Laptop laptop = laptopRepository.findById(id)
+                .orElseThrow(() -> new MicroCenterException("Service.LAPTOP_NOT_FOUND"));
         laptopRepository.deleteById(id);
+        return getDTOFrom(laptop);
     }
 
     @Override
