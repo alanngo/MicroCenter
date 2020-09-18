@@ -9,28 +9,30 @@ import java.util.Objects;
 public class LaptopDTO
 {
     private Integer id;
-
-    @NotNull
+    @NotNull(message = "microcenter.name.required")
     private String name;
 
 
+    @NotNull(message = "microcenter.cpu.required")
     @Pattern(regexp = "(Intel core i[3579] [0-9]{4,}[A-Za-z]*)" +
                         "|(AMD Ryzen [3579] [0-9]{4,}[A-Za-z]*)",
             message = "microcenter.cpu.invalid")
     private String cpu;
-    
-    @Min(value = 4)
+
+    @NotNull(message = "microcenter.ram.required")
+    @Min(value = 4, message = "microcenter.ram.invalid")
     private Integer ram;
 
-    @NotNull
+
     private Integer nvme;
 
-    @NotNull
+
     private Integer ssd;
 
-    @NotNull
+
     private Integer hdd;
 
+    @NotNull(message = "microcenter.gpu.required")
     @Pattern(regexp = "(Intel U?HD [56][23]0)|" +
                         "([Nn]vidia Geforce [GR]TX [123][06][5678]0)(| super| Ti)",
             message = "microcenter.gpu.invalid")
